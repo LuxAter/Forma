@@ -2,7 +2,7 @@
 # PROJECT
 # ##############################################################################
 cmake_minimum_required(VERSION 3.0.0)
-project(Forma VERSION 0.1.3)
+project(Forma VERSION 0.1.4)
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
   set(MAIN_PROJECT TRUE)
 endif()
