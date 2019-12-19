@@ -4,6 +4,10 @@
 extern forma::Application* forma::create_application();
 int main(int argc, char *argv[])
 {
+  forma::Log::init();
+  LWARN("INITALIZED LOGGER");
+  INFO(" VAL: {}", 4);
+
   auto app = forma::create_application();
   app->run();
   delete app;

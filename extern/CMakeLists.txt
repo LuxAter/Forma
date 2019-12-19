@@ -6,8 +6,9 @@ macro(load_submodule REPO_NAME)
   string(TOUPPER ${REPO_NAME} MODULE_NAME)
   if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${REPO_NAME}/.git)
     execute_process(
-      COMMAND git submodule update --init --
-      ${CMAKE_CURRENT_SOURCE_DIR}/${REPO_NAME})
+      COMMAND
+        git submodule update --init --recursive --
+        ${CMAKE_CURRENT_SOURCE_DIR}/${REPO_NAME})
   elseif(NOT GIT_FOUND)
     message(FATAL_ERROR "Git is required for submodules ${MODULE_NAME}")
   else()
