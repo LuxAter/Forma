@@ -2,7 +2,7 @@
 # PROJECT
 # ##############################################################################
 cmake_minimum_required(VERSION 3.11.0 FATAL_ERROR)
-project(Forma VERSION 0.1.4)
+project(Forma VERSION 0.1.5)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
   set(MAIN_PROJECT TRUE)
@@ -13,8 +13,8 @@ endif()
 # ##############################################################################
 option(BUILD_SHARED_LIBS "Compile shared libraries" TRUE)
 option(BUILD_STATIC_LIBS "Compile static libraries" TRUE)
-option(BUILD_EXAMPELS "Compile included examples" ${MAIN_PROJECT})
-option(ENABLE_STATIC_ANALYSIS "Use static analysis tools" ${MAIN_PROJECT})
+option(BUILD_EXAMPLES "Compile included examples" ${MAIN_PROJECT})
+option(ENABLE_STATIC_ANALYSIS "Use static analysis tools" OFF)
 set(FORMA_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
 set(FORMA_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -41,7 +41,10 @@ endif()
 # STATIC ANALYSIS
 # ##############################################################################
 if(ENABLE_STATIC_ANALYSIS OR CMAKE_BUILD_TYPE STREQUAL "Release")
-  find_program(CLANG_TIDY_EXE NAMES "clang-tidy" DOC "Path to clang tidy exe")
+  find_program(
+    CLANG_TIDY_EXE
+    NAMES "clang-tidy"
+    DOC "Path to clang tidy exe")
   if(CLANG_TIDY_EXE)
     set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}")
   endif()
@@ -61,11 +64,16 @@ endif()
 include(WriteCompilerDetectionHeader)
 set(COMPILERS Clang GNU Intel MSVC)
 write_compiler_detection_header(
-  FILE ${CMAKE_CURRENT_SOURCE_DIR}/include/forma/os/compiler.hpp
-  PREFIX FORMA 
-  COMPILERS ${COMPILERS}
-  FEATURES cxx_constexpr cxx_noexcept cxx_attribute_deprecated
-)
+  FILE
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/forma/os/compiler.hpp
+  PREFIX
+  FORMA
+  COMPILERS
+  ${COMPILERS}
+  FEATURES
+  cxx_constexpr
+  cxx_noexcept
+  cxx_attribute_deprecated)
 
 # ##############################################################################
 # DEPENDENCIES

@@ -2,15 +2,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${FORMA_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${FORMA_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${FORMA_BINARY_DIR})
 
-# # ##############################################################################
-# # DEPENDENCIES
-# # ##############################################################################
-# add_subdirectory(${FORMA_SOURCE_DIR}/extern ${FORMA_BINARY_DIR}/extern)
-
 # ##############################################################################
 # SOURCE FILES
 # ##############################################################################
-set(SOURCES core.cpp application.cpp)
+set(SOURCES core.cpp application.cpp log.cpp)
 configure_file("${FORMA_SOURCE_DIR}/include/forma/version.hpp.in"
                "${FORMA_SOURCE_DIR}/include/forma/version.hpp")
 
@@ -21,6 +16,7 @@ if(BUILD_STATIC_LIBS)
   add_library(forma_static STATIC ${SOURCES})
   add_library(forma::static ALIAS forma_static)
   target_include_directories(forma_static PUBLIC ${FORMA_SOURCE_DIR}/include)
+  target_link_libraries(forma_static PUBLIC spdlog::spdlog)
 endif()
 
 # ##############################################################################
@@ -34,7 +30,7 @@ if(BUILD_SHARED_LIBS)
     forma_shared
     PROPERTIES CXX_STANDARD 11 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS OFF)
 
-  target_link_libraries(forma_shared PUBLIC spdlog)
+  target_link_libraries(forma_shared PUBLIC spdlog::spdlog)
 endif()
 
 # ##############################################################################

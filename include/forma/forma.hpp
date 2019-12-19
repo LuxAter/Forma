@@ -2,6 +2,7 @@
 #define FORMA_FORMA_HPP_
 
 #include "application.hpp"
+#include "log.hpp"
 
 // User Entry Point
 #include "entry_point.hpp"

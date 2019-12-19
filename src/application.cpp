@@ -1,10 +1,8 @@
 #include "forma/application.hpp"
 
-namespace forma {
-Application::Application() {}
-Application::~Application() {}
-void Application::run() {
-  while (true) {
-  }
+forma::Application::Application() {}
+forma::Application::~Application() {}
+void forma::Application::run() {
+  // while (true) {
+  // }
 }
-} // namespace forma
