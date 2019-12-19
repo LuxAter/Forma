@@ -1,5 +1,11 @@
-int main(int argc, char const *argv[])
-{
-    /* code */
-    return 0;
+#include <forma/forma.hpp>
+
+class Sandbox : public forma::Application {
+public:
+  Sandbox() {}
+  ~Sandbox() {}
+};
+
+forma::Application* forma::create_application(){
+  return new Sandbox();
 }
