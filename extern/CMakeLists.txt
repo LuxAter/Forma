@@ -23,5 +23,11 @@ endmacro()
 # DEPENDENCIES
 # ##############################################################################
 option(SPDLOG_BUILD_SHARED "" ${BUILD_SHARED_LIBS})
+option(GLFW_BUILD_EXAMPLES "Build the GLFW example programs" OFF)
+option(GLFW_BUILD_TESTS "Build the GLFW test programs" OFF)
+option(GLFW_BUILD_DOCS "Build the GLFW documentation" ON)
+option(GLFW_INSTALL "Generate installation target" OFF)
+
 load_submodule(spdlog)
 load_submodule(fmt)
+load_submodule(glfw)
