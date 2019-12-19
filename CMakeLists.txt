@@ -2,7 +2,7 @@
 # PROJECT
 # ##############################################################################
 cmake_minimum_required(VERSION 3.11.0 FATAL_ERROR)
-project(Forma VERSION 0.1.5)
+project(Forma VERSION 0.1.6)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
   set(MAIN_PROJECT TRUE)
@@ -36,6 +36,8 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
               ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json)
   endif()
 endif()
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 # ##############################################################################
 # STATIC ANALYSIS
