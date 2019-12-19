@@ -3,6 +3,8 @@
 
 #include "application.hpp"
 #include "log.hpp"
+#include "events/event.hpp"
+#include "events/key_event.hpp"
 
 // User Entry Point
 #include "entry_point.hpp"

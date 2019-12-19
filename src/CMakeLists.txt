@@ -16,7 +16,13 @@ if(BUILD_STATIC_LIBS)
   add_library(forma_static STATIC ${SOURCES})
   add_library(forma::static ALIAS forma_static)
   target_include_directories(forma_static PUBLIC ${FORMA_SOURCE_DIR}/include)
+
+  set_target_properties(
+    forma_static
+    PROPERTIES CXX_STANDARD 11 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS OFF)
+
   target_link_libraries(forma_static PUBLIC spdlog::spdlog)
+  target_link_libraries(forma_static PUBLIC fmt::fmt)
 endif()
 
 # ##############################################################################
@@ -26,11 +32,13 @@ if(BUILD_SHARED_LIBS)
   add_library(forma_shared SHARED ${SOURCES})
   add_library(forma::shared ALIAS forma_shared)
   target_include_directories(forma_shared PUBLIC ${FORMA_SOURCE_DIR}/include)
+
   set_target_properties(
     forma_shared
     PROPERTIES CXX_STANDARD 11 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS OFF)
 
   target_link_libraries(forma_shared PUBLIC spdlog::spdlog)
+  target_link_libraries(forma_shared PUBLIC fmt::fmt)
 endif()
 
 # ##############################################################################
