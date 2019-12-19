@@ -6,6 +6,8 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 # SOURCE FILES
 # ##############################################################################
 set(SOURCES core.cpp application.cpp)
+configure_file("${FORMA_SOURCE_DIR}/include/forma/version.hpp.in"
+               "${FORMA_SOURCE_DIR}/include/forma/version.hpp")
 
 # ##############################################################################
 # STATIC TARGET
@@ -23,6 +25,11 @@ if(BUILD_SHARED_LIBS)
   add_library(forma_shared SHARED ${SOURCES})
   add_library(forma::shared ALIAS forma_shared)
   target_include_directories(forma_shared PUBLIC ${FORMA_SOURCE_DIR}/include)
+  set_target_properties(
+    forma_shared
+    PROPERTIES CXX_STANDARD 11 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS OFF)
+
+  target_link_libraries(forma_shared PUBLIC spdlog::spdlog)
 endif()
 
 # ##############################################################################

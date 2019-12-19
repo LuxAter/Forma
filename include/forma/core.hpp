@@ -1,24 +1,11 @@
-#ifndef CORE_HPP_
-#define CORE_HPP_
+#ifndef FORMA_CORE_HPP_
+#define FORMA_CORE_HPP_
 
-#ifdef __APPLE__
-#define FORMA_PLATFORM_APPLE
-#elif __MINGW32__
-#define FORMA_PLATFORM_WINDOWS
-#elif __linux__
-#define FORMA_PLATFORM_LINUX
-#else
-#error Failed to recognize platform
-#endif
+#include "os/compiler.hpp"
+#include "os/platform.hpp"
 
-#ifdef FORMA_PLATFORM_WINDOWS
-  #ifdef FORMA_BUILD_DLL
-    #define FORMA_API __declspec(dllexport)
-  #else
-    #define FORMA_API __declspec(dllimport)
-  #endif
-#else
-  #define FORMA_API
-#endif
+namespace forma {
+FORMA_CONSTEXPR const char *get_platform_name() { return FORMA_PLATFORM; }
+} // namespace forma
 
-#endif // CORE_HPP_
+#endif // FORMA_CORE_HPP_

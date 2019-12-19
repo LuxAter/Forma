@@ -1,5 +1,5 @@
-#ifndef APPLICATION_HPP_
-#define APPLICATION_HPP_
+#ifndef FORMA_APPLICATION_HPP_
+#define FORMA_APPLICATION_HPP_
 
 #include "core.hpp"
 
@@ -13,4 +13,4 @@ public:
 Application* create_application();
 } // namespace forma
 
-#endif // APPLICATION_HPP_
+#endif // FORMA_APPLICATION_HPP_
