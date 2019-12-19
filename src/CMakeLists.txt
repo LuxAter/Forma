@@ -1,6 +1,11 @@
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${FORMA_BINARY_DIR})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${FORMA_BINARY_DIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${FORMA_BINARY_DIR})
+
+# ##############################################################################
+# DEPENDENCIES
+# ##############################################################################
+add_subdirectory(${FORMA_SOURCE_DIR}/extern ${FORMA_BINARY_DIR}/extern)
 
 # ##############################################################################
 # SOURCE FILES
