@@ -2,10 +2,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${FORMA_BINARY_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${FORMA_BINARY_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${FORMA_BINARY_DIR})
 
-# ##############################################################################
-# DEPENDENCIES
-# ##############################################################################
-add_subdirectory(${FORMA_SOURCE_DIR}/extern ${FORMA_BINARY_DIR}/extern)
+# # ##############################################################################
+# # DEPENDENCIES
+# # ##############################################################################
+# add_subdirectory(${FORMA_SOURCE_DIR}/extern ${FORMA_BINARY_DIR}/extern)
 
 # ##############################################################################
 # SOURCE FILES
@@ -34,7 +34,7 @@ if(BUILD_SHARED_LIBS)
     forma_shared
     PROPERTIES CXX_STANDARD 11 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS OFF)
 
-  target_link_libraries(forma_shared PUBLIC spdlog::spdlog)
+  target_link_libraries(forma_shared PUBLIC spdlog)
 endif()
 
 # ##############################################################################
@@ -42,6 +42,8 @@ endif()
 # ##############################################################################
 if(BUILD_SHARED_LIBS)
   add_library(forma ALIAS forma_shared)
+  add_library(forma::forma ALIAS forma_shared)
 elseif(BUILD_STATIC_LIBS)
   add_library(forma ALIAS forma_static)
+  add_library(forma::forma ALIAS forma_static)
 endif()
