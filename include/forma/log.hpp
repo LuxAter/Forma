@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 
-#ifdef DEBUG
+#ifdef __DEBUG__
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 #endif
 
