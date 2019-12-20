@@ -17,8 +17,8 @@ public:
   inline unsigned get_width() const override { return data.width; }
   inline unsigned get_height() const override { return data.height; }
 
-  inline void set_event_callback(const EventCallback &callback) override {
-    data.callback = callback;
+  inline void set_event_callback(const EventCallback &event_callback) override {
+    data.event_callback = event_callback;
   }
   void set_vsync(bool enabled) override;
   bool is_vsync() const override;
@@ -33,7 +33,7 @@ private:
     unsigned int width, height;
     bool vsync;
 
-    EventCallback callback;
+    EventCallback event_callback;
   };
   WindowData data;
 };

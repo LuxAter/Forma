@@ -28,7 +28,7 @@ public:
 
 class FORMA_API Window {
 public:
-  using EventCallback = std::function<void(const Event &)>;
+  using EventCallback = std::function<void(Event &)>;
   virtual ~Window() {}
   virtual void on_update() = 0;
   virtual unsigned int get_width() const = 0;

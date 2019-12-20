@@ -1,8 +1,8 @@
 #ifndef FORMA_EVENT_HPP_
 #define FORMA_EVENT_HPP_
 
-#include <string>
 #include <functional>
+#include <string>
 
 #include "forma/core.hpp"
 
@@ -57,14 +57,14 @@ protected:
 };
 
 class EventDispatcher {
-  template <typename T> using EventFn = std::function<bool(const T &)>;
+  template <typename T> using EventFn = std::function<bool(T &)>;
 
 public:
   EventDispatcher(Event &event) : event(event) {}
   template <typename T>
   typename std::enable_if<std::is_base_of<Event, T>::value, bool>::type
   dispatch(EventFn<T> func) {
-    if (event.get_type() == T::GetStaticType()) {
+    if (event.get_type() == T::get_static_type()) {
       event.handled = func(*(T *)&event);
       return true;
     }
