@@ -52,7 +52,6 @@ public:
     return get_category() & category;
   }
 
-protected:
   bool handled = false;
 };
 

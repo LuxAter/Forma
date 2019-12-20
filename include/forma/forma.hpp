@@ -2,6 +2,7 @@
 #define FORMA_FORMA_HPP_
 
 #include "application.hpp"
+#include "layer.hpp"
 #include "log.hpp"
 #include "events/event.hpp"
 #include "events/key_event.hpp"

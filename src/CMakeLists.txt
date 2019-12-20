@@ -5,7 +5,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${FORMA_BINARY_DIR})
 # ##############################################################################
 # SOURCE FILES
 # ##############################################################################
-set(SOURCES core.cpp application.cpp log.cpp)
+set(SOURCES core.cpp application.cpp log.cpp layer.cpp layer_stack.cpp)
 if(MSVC
    OR MSYS
    OR MINGW
