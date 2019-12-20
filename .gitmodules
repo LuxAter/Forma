@@ -1,9 +1,9 @@
-[submodule "extern/spdlog"]
-	path = extern/spdlog
+[submodule "packages/spdlog"]
+	path = packages/spdlog
 	url = https://github.com/gabime/spdlog
-[submodule "extern/fmt"]
-	path = extern/fmt
-	url = https://github.com/fmtlib/fmt
-[submodule "extern/glfw"]
-	path = extern/glfw
+[submodule "packages/glfw"]
+	path = packages/glfw
 	url = https://github.com/glfw/glfw
+[submodule "packages/fmt"]
+	path = packages/fmt
+	url = https://github.com/fmtlib/fmt
