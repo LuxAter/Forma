@@ -47,14 +47,4 @@
 #error Failed to recognize platform
 #endif
 
-#ifdef FORMA_PLATFORM_WINDOWS
-#ifdef FORMA_BUILD_DLL
-#define FORMA_API __declspec(dllexport)
-#else
-#define FORMA_API __declspec(dllimport)
-#endif
-#else
-#define FORMA_API
-#endif
-
 #endif // FORMA_PLATFORM_DETECTION_HPP_

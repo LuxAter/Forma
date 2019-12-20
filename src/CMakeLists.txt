@@ -6,6 +6,16 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${FORMA_BINARY_DIR})
 # SOURCE FILES
 # ##############################################################################
 set(SOURCES core.cpp application.cpp log.cpp)
+if(MSVC
+   OR MSYS
+   OR MINGW
+   OR WIN32)
+  list(APPEND SOURCES platform/windows/windows_window.cpp)
+elseif(APPLE)
+  list(APPEND SOURCES platform/apple/apple_window.cpp)
+elseif(UNIX AND NOT APPLE)
+  list(APPEND SOURCES platform/linux/linux_window.cpp)
+endif()
 configure_file("${FORMA_SOURCE_DIR}/include/forma/version.hpp.in"
                "${FORMA_SOURCE_DIR}/include/forma/version.hpp")
 

@@ -3,8 +3,8 @@
 
 #include <fmt/format.h>
 
-#include "forma/core.hpp"
 #include "event.hpp"
+#include "forma/core.hpp"
 
 namespace forma {
 class FORMA_API MouseMovedEvent : public Event {
@@ -37,32 +37,27 @@ private:
 };
 class FORMA_API MouseButtonEvent : public Event {
 public:
-  inline float get_x() const { return xpos; }
-  inline float get_y() const { return ypos; }
   inline int get_mouse_button() const { return button; }
 
   EVENT_CLASS_CATEGORY(MOUSE_EVENT | INPUT_EVENT);
 
 protected:
-  MouseButtonEvent(const int &button, const float &x, const float &y)
-      : button(button), xpos(x), ypos(y) {}
-  MouseButtonEvent(const int &button) : button(button), xpos(), ypos() {}
+  MouseButtonEvent(const int &button) : button(button) {}
   int button;
-  float xpos, ypos;
 };
 class FORMA_API MouseButtonPressedEvent : public MouseButtonEvent {
+public:
   MouseButtonPressedEvent(int button) : MouseButtonEvent(button) {}
   std::string to_string() const override {
-    return fmt::format("MouseButtonPressedEvent: {} ({}, {})", button, xpos,
-                       ypos);
+    return fmt::format("MouseButtonPressedEvent: {}", button);
   }
   EVENT_CLASS_TYPE(MOUSE_BUTTON_PRESSED);
 };
 class FORMA_API MouseButtonReleasedEvent : public MouseButtonEvent {
+public:
   MouseButtonReleasedEvent(int button) : MouseButtonEvent(button) {}
   std::string to_string() const override {
-    return fmt::format("MouseButtonReleasedEvent: {} ({}, {})", button, xpos,
-                       ypos);
+    return fmt::format("MouseButtonReleasedEvent: {}", button);
   }
   EVENT_CLASS_TYPE(MOUSE_BUTTON_RELEASED);
 };
