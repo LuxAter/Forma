@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include <glad/glad.h>
+
 #include <GLFW/glfw3.h>
 
 #include <forma/window.hpp>
@@ -17,7 +19,8 @@ public:
   inline unsigned get_width() const override { return data.width; }
   inline unsigned get_height() const override { return data.height; }
 
-  inline void set_event_event_callback(const EventCallback &event_callback) override {
+  inline void
+  set_event_event_callback(const EventCallback &event_callback) override {
     data.event_callback = event_callback;
   }
   void set_vsync(bool enabled) override;

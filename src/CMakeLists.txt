@@ -34,6 +34,7 @@ if(BUILD_STATIC_LIBS)
   target_link_libraries(forma_static PUBLIC spdlog::spdlog)
   target_link_libraries(forma_static PUBLIC fmt::fmt)
   target_link_libraries(forma_static PUBLIC glfw)
+  target_link_libraries(forma_static PUBLIC glad)
 endif()
 
 # ##############################################################################
@@ -51,6 +52,7 @@ if(BUILD_SHARED_LIBS)
   target_link_libraries(forma_shared PUBLIC spdlog::spdlog)
   target_link_libraries(forma_shared PUBLIC fmt::fmt)
   target_link_libraries(forma_shared PUBLIC glfw)
+  target_link_libraries(forma_shared PUBLIC glad)
 endif()
 
 # ##############################################################################
