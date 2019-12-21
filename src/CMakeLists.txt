@@ -5,7 +5,14 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${FORMA_BINARY_DIR})
 # ##############################################################################
 # SOURCE FILES
 # ##############################################################################
-set(SOURCES core.cpp application.cpp log.cpp layer.cpp layer_stack.cpp)
+set(SOURCES
+    core.cpp
+    application.cpp
+    log.cpp
+    layer.cpp
+    layer_stack.cpp
+    imgui/imgui_layer.cpp
+    platform/opengl/imgui_impl_opengl3.cpp)
 if(MSVC
    OR MSYS
    OR MINGW
@@ -31,10 +38,11 @@ if(BUILD_STATIC_LIBS)
     forma_static
     PROPERTIES CXX_STANDARD 11 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS OFF)
 
-  target_link_libraries(forma_static PUBLIC spdlog::spdlog)
   target_link_libraries(forma_static PUBLIC fmt::fmt)
+  target_link_libraries(forma_static PUBLIC spdlog)
   target_link_libraries(forma_static PUBLIC glfw)
   target_link_libraries(forma_static PUBLIC glad)
+  target_link_libraries(forma_static PUBLIC imgui_static)
 endif()
 
 # ##############################################################################
@@ -49,10 +57,11 @@ if(BUILD_SHARED_LIBS)
     forma_shared
     PROPERTIES CXX_STANDARD 11 CXX_STANDARD_REQUIRED YES CXX_EXTENSIONS OFF)
 
-  target_link_libraries(forma_shared PUBLIC spdlog::spdlog)
   target_link_libraries(forma_shared PUBLIC fmt::fmt)
+  target_link_libraries(forma_shared PUBLIC spdlog)
   target_link_libraries(forma_shared PUBLIC glfw)
   target_link_libraries(forma_shared PUBLIC glad)
+  target_link_libraries(forma_shared PUBLIC imgui_shared)
 endif()
 
 # ##############################################################################

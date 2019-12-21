@@ -13,7 +13,7 @@ public:
   virtual void on_attach() {}
   virtual void on_detach() {}
   virtual void on_update() {}
-  virtual void on_event(Event &event) {}
+  virtual void on_event(Event &) {}
 
   inline const std::string &get_name() const { return layer_name; }
 
