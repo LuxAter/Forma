@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include <glad/glad.h>
+
 #include <GLFW/glfw3.h>
 
 #include <forma/events/application_event.hpp>
@@ -65,27 +67,27 @@ void forma::WindowsWindow::init(const WindowProps &props) {
     WindowCloseEvent event;
     data.event_callback(event);
   });
-  glfwSetKeyCallback(window, [](GLFWwindow *window, int key, int scancode,
-                                int action, int mods) {
-    WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
-    switch (action) {
-    case GLFW_PRESS: {
-      KeyPressedEvent event(key, 0);
-      data.event_callback(event);
-      break;
-    }
-    case GLFW_RELEASE: {
-      KeyReleasedEvent event(key);
-      data.event_callback(event);
-      break;
-    }
-    case GLFW_REPEAT: {
-      KeyPressedEvent event(key, 1);
-      data.event_callback(event);
-      break;
-    }
-    }
-  });
+  glfwSetKeyCallback(
+      window, [](GLFWwindow *window, int key, int, int action, int) {
+        WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
+        switch (action) {
+        case GLFW_PRESS: {
+          KeyPressedEvent event(key, 0);
+          data.event_callback(event);
+          break;
+        }
+        case GLFW_RELEASE: {
+          KeyReleasedEvent event(key);
+          data.event_callback(event);
+          break;
+        }
+        case GLFW_REPEAT: {
+          KeyPressedEvent event(key, 1);
+          data.event_callback(event);
+          break;
+        }
+        }
+      });
   glfwSetMouseButtonCallback(
       window, [](GLFWwindow *window, int button, int action, int mods) {
         WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);

@@ -7,3 +7,6 @@
 [submodule "packages/fmt"]
 	path = packages/fmt
 	url = https://github.com/fmtlib/fmt
+[submodule "packages/imgui-cmake"]
+	path = packages/imgui-cmake
+	url = https://github.com/LuxAter/imgui-cmake

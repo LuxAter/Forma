@@ -2,7 +2,10 @@
 # PROJECT
 # ##############################################################################
 cmake_minimum_required(VERSION 3.11.0 FATAL_ERROR)
-project(Forma VERSION 0.1.15)
+project(
+  Forma
+  VERSION 0.1.15
+  LANGUAGES C CXX)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
   set(MAIN_PROJECT TRUE)
@@ -12,9 +15,9 @@ endif()
 # OPTIONS
 # ##############################################################################
 option(BUILD_SHARED_LIBS "Compile shared libraries" TRUE)
-option(BUILD_STATIC_LIBS "Compile static libraries" TRUE)
+option(BUILD_STATIC_LIBS "Compile static libraries" FALSE)
 option(BUILD_EXAMPLES "Compile included examples" ${MAIN_PROJECT})
-option(ENABLE_STATIC_ANALYSIS "Use static analysis tools" ${MAIN_PROJECT})
+option(ENABLE_STATIC_ANALYSIS "Use static analysis tools" FALSE)
 set(FORMA_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
 set(FORMA_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 

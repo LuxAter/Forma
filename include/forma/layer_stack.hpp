@@ -3,8 +3,8 @@
 
 #include <vector>
 
-#include <forma/core.hpp>
-#include <forma/layer.hpp>
+#include "core.hpp"
+#include "layer.hpp"
 
 namespace forma {
 class FORMA_API LayerStack {
@@ -21,8 +21,8 @@ public:
   inline std::vector<Layer *>::iterator end() { return layers.end(); }
 
 private:
-  std::vector<Layer*> layers;
-  std::vector<Layer*>::iterator layer_insert;
+  std::vector<Layer *> layers;
+  std::vector<Layer *>::iterator layer_insert;
 };
 } // namespace forma
 

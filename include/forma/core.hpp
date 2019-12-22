@@ -1,6 +1,8 @@
 #ifndef FORMA_CORE_HPP_
 #define FORMA_CORE_HPP_
 
+#include <csignal>
+
 #include "compiler/compiler.hpp"
 #include "platform/platform.hpp"
 
@@ -14,17 +16,23 @@
 #define FORMA_API
 #endif
 
+#ifdef __DEBUG__
+#define FORMA_ENABLE_ASSERTS
+#endif
+
 #ifdef FORMA_ENABLE_ASSERTS
 #define FORMA_ASSERT(x, ...)                                                   \
   {                                                                            \
     if (!(x)) {                                                                \
       LERROR("Assertion Failed: {}", __VA_ARGS__);                             \
-      raise(SIGTRAP);                                                          \
+      std::raise(SIGTRAP);                                                     \
     }                                                                          \
   }
 #else
 #define FORMA_ASSERT(x, ...)
 #endif
+
+#define FORMA_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
 
 namespace forma {
 inline FORMA_CONSTEXPR const char *get_platform_name() {

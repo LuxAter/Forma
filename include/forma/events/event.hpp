@@ -4,7 +4,7 @@
 #include <functional>
 #include <string>
 
-#include "forma/core.hpp"
+#include "../core.hpp"
 
 #define EVENT_CLASS_TYPE(type)                                                 \
   static EventType get_static_type() { return EventType::type; }               \
@@ -26,6 +26,7 @@ enum class EventType {
   APP_RENDER,
   KEY_PRESSED,
   KEY_RELEASED,
+  KEY_TYPED,
   MOUSE_BUTTON_PRESSED,
   MOUSE_BUTTON_RELEASED,
   MOUSE_MOVED,

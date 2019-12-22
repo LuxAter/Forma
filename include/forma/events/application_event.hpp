@@ -3,7 +3,7 @@
 
 #include <fmt/format.h>
 
-#include "forma/core.hpp"
+#include "../core.hpp"
 #include "event.hpp"
 
 namespace forma {

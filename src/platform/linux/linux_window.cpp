@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include <glad/glad.h>
+
 #include <GLFW/glfw3.h>
 
 #include <forma/events/application_event.hpp>
@@ -40,15 +42,23 @@ void forma::LinuxWindow::init(const WindowProps &props) {
 
   LINFO("Creating window {} ({}, {}))", data.title, data.width, data.height);
   if (!glfw_initalized) {
+#ifdef FORMA_ENABLE_ASSERTS
     int success = glfwInit();
     FORMA_ASSERT(success, "Could not initalize GLFW");
+#else
+    glfwInit();
+#endif
     glfwSetErrorCallback(glfw_error_callback);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
     glfw_initalized = true;
   }
   window = glfwCreateWindow(static_cast<int>(data.width),
                             static_cast<int>(data.height), data.title.c_str(),
                             nullptr, nullptr);
   glfwMakeContextCurrent(window);
+  int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+  FORMA_ASSERT(status, "Failed to initalize GLAD");
   glfwSetWindowUserPointer(window, &data);
   set_vsync(true);
 
@@ -65,29 +75,34 @@ void forma::LinuxWindow::init(const WindowProps &props) {
     WindowCloseEvent event;
     data.event_callback(event);
   });
-  glfwSetKeyCallback(window, [](GLFWwindow *window, int key, int scancode,
-                                int action, int mods) {
+  glfwSetKeyCallback(
+      window, [](GLFWwindow *window, int key, int, int action, int) {
+        WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
+        switch (action) {
+        case GLFW_PRESS: {
+          KeyPressedEvent event(key, 0);
+          data.event_callback(event);
+          break;
+        }
+        case GLFW_RELEASE: {
+          KeyReleasedEvent event(key);
+          data.event_callback(event);
+          break;
+        }
+        case GLFW_REPEAT: {
+          KeyPressedEvent event(key, 1);
+          data.event_callback(event);
+          break;
+        }
+        }
+      });
+  glfwSetCharCallback(window, [](GLFWwindow *window, unsigned int keycode) {
     WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
-    switch (action) {
-    case GLFW_PRESS: {
-      KeyPressedEvent event(key, 0);
-      data.event_callback(event);
-      break;
-    }
-    case GLFW_RELEASE: {
-      KeyReleasedEvent event(key);
-      data.event_callback(event);
-      break;
-    }
-    case GLFW_REPEAT: {
-      KeyPressedEvent event(key, 1);
-      data.event_callback(event);
-      break;
-    }
-    }
+    KeyTypedEvent event(keycode);
+    data.event_callback(event);
   });
   glfwSetMouseButtonCallback(
-      window, [](GLFWwindow *window, int button, int action, int mods) {
+      window, [](GLFWwindow *window, int button, int action, int) {
         WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
         switch (action) {
         case GLFW_PRESS: {

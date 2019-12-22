@@ -23,12 +23,17 @@ public:
 
   void run();
 
+  inline static Application &get() { return *instance; }
+  inline Window &get_window() { return *(window.get()); }
+
 private:
   bool on_window_close(WindowCloseEvent &);
 
   std::unique_ptr<Window> window;
   bool running = true;
   LayerStack layer_stack;
+
+  static Application *instance;
 };
 Application *create_application();
 } // namespace forma
