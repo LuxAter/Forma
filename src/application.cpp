@@ -2,6 +2,8 @@
 
 #include "forma/log.hpp"
 
+#include "forma/input.hpp"
+
 #include <glad/glad.h>
 
 #include <GLFW/glfw3.h>

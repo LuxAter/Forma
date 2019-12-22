@@ -24,6 +24,9 @@ public:
   }
   void set_vsync(bool enabled) override;
   bool is_vsync() const override;
+  inline virtual void *get_native_window() const override {
+    return static_cast<void *>(window);
+  }
 
 private:
   virtual void init(const WindowProps &props);

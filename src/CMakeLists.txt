@@ -21,7 +21,8 @@ if(MSVC
 elseif(APPLE)
   list(APPEND SOURCES platform/apple/apple_window.cpp)
 elseif(UNIX AND NOT APPLE)
-  list(APPEND SOURCES platform/linux/linux_window.cpp)
+  list(APPEND SOURCES platform/linux/linux_window.cpp
+              platform/linux/linux_input.cpp)
 endif()
 configure_file("${FORMA_SOURCE_DIR}/include/forma/version.hpp.in"
                "${FORMA_SOURCE_DIR}/include/forma/version.hpp")
