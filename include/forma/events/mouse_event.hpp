@@ -3,8 +3,8 @@
 
 #include <fmt/format.h>
 
+#include "../core.hpp"
 #include "event.hpp"
-#include "forma/core.hpp"
 
 namespace forma {
 class FORMA_API MouseMovedEvent : public Event {

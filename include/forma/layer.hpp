@@ -1,8 +1,8 @@
 #ifndef FORMA_LAYER_HPP_
 #define FORMA_LAYER_HPP_
 
-#include <forma/core.hpp>
-#include <forma/events/event.hpp>
+#include "core.hpp"
+#include "events/event.hpp"
 
 namespace forma {
 class FORMA_API Layer {

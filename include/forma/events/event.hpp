@@ -4,7 +4,7 @@
 #include <functional>
 #include <string>
 
-#include "forma/core.hpp"
+#include "../core.hpp"
 
 #define EVENT_CLASS_TYPE(type)                                                 \
   static EventType get_static_type() { return EventType::type; }               \
