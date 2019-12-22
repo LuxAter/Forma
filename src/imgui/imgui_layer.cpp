@@ -3,9 +3,12 @@
 #include <imgui.h>
 
 #include <forma/application.hpp>
+#include <forma/events/event.hpp>
 #include <forma/layer.hpp>
 #include <forma/log.hpp>
 #include <forma/platform/opengl/imgui_impl_opengl3.h>
+
+#include <glad/glad.h>
 
 #include <GLFW/glfw3.h>
 
@@ -66,4 +69,80 @@ void forma::ImGuiLayer::on_update() {
   ImGui::Render();
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
-void forma::ImGuiLayer::on_event(Event &event) {}
+void forma::ImGuiLayer::on_event(Event &event) {
+  LINFO("IMGUI LAYER EVENT HANDLING");
+  EventDispatcher dispatcher(event);
+  dispatcher.dispatch<MouseButtonPressedEvent>(
+      FORMA_BIND_EVENT_FN(ImGuiLayer::on_mouse_button_pressed));
+  dispatcher.dispatch<MouseButtonReleasedEvent>(
+      FORMA_BIND_EVENT_FN(ImGuiLayer::on_mouse_button_released));
+  dispatcher.dispatch<MouseMovedEvent>(
+      FORMA_BIND_EVENT_FN(ImGuiLayer::on_mouse_moved));
+  dispatcher.dispatch<MouseScrolledEvent>(
+      FORMA_BIND_EVENT_FN(ImGuiLayer::on_mouse_scrolled));
+  dispatcher.dispatch<KeyPressedEvent>(
+      FORMA_BIND_EVENT_FN(ImGuiLayer::on_key_pressed));
+  dispatcher.dispatch<KeyReleasedEvent>(
+      FORMA_BIND_EVENT_FN(ImGuiLayer::on_key_released));
+  dispatcher.dispatch<KeyTypedEvent>(
+      FORMA_BIND_EVENT_FN(ImGuiLayer::on_key_typed));
+  dispatcher.dispatch<WindowResizeEvent>(
+      FORMA_BIND_EVENT_FN(ImGuiLayer::on_window_resized));
+}
+
+bool forma::ImGuiLayer::on_mouse_button_pressed(
+    MouseButtonPressedEvent &event) {
+  ImGuiIO &io = ImGui::GetIO();
+  io.MouseDown[event.get_mouse_button()] = true;
+  return false;
+}
+bool forma::ImGuiLayer::on_mouse_button_released(
+    MouseButtonReleasedEvent &event) {
+  ImGuiIO &io = ImGui::GetIO();
+  io.MouseDown[event.get_mouse_button()] = false;
+  return false;
+}
+bool forma::ImGuiLayer::on_mouse_moved(MouseMovedEvent &event) {
+  ImGuiIO &io = ImGui::GetIO();
+  LINFO("Mouse: {}, {}", event.get_x(), event.get_y());
+  io.MousePos = ImVec2(event.get_x(), event.get_y());
+  return false;
+}
+bool forma::ImGuiLayer::on_mouse_scrolled(MouseScrolledEvent &event) {
+  ImGuiIO &io = ImGui::GetIO();
+  io.MouseWheelH += event.get_x();
+  io.MouseWheel += event.get_y();
+  return false;
+}
+bool forma::ImGuiLayer::on_key_pressed(KeyPressedEvent &event) {
+  ImGuiIO &io = ImGui::GetIO();
+  io.KeysDown[event.get_keycode()] = true;
+  io.KeyCtrl =
+      io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
+  io.KeyShift =
+      io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
+  io.KeyAlt = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
+  io.KeySuper =
+      io.KeysDown[GLFW_KEY_LEFT_SUPER] || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
+  return false;
+}
+bool forma::ImGuiLayer::on_key_released(KeyReleasedEvent &event) {
+  ImGuiIO &io = ImGui::GetIO();
+  io.KeysDown[event.get_keycode()] = false;
+  return false;
+}
+bool forma::ImGuiLayer::on_key_typed(KeyTypedEvent &event) {
+  ImGuiIO &io = ImGui::GetIO();
+  int keycode = event.get_keycode();
+  if (keycode > 0 && keycode < 0x10000) {
+    io.AddInputCharacter(static_cast<unsigned short>(keycode));
+  }
+  return false;
+}
+bool forma::ImGuiLayer::on_window_resized(WindowResizeEvent &event) {
+  ImGuiIO &io = ImGui::GetIO();
+  io.DisplaySize = ImVec2(event.get_width(), event.get_height());
+  io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
+  glViewport(0, 0, event.get_width(), event.get_height());
+  return false;
+}

@@ -15,9 +15,9 @@ endif()
 # OPTIONS
 # ##############################################################################
 option(BUILD_SHARED_LIBS "Compile shared libraries" TRUE)
-option(BUILD_STATIC_LIBS "Compile static libraries" NO)
+option(BUILD_STATIC_LIBS "Compile static libraries" FALSE)
 option(BUILD_EXAMPLES "Compile included examples" ${MAIN_PROJECT})
-option(ENABLE_STATIC_ANALYSIS "Use static analysis tools" ${MAIN_PROJECT})
+option(ENABLE_STATIC_ANALYSIS "Use static analysis tools" FALSE)
 set(FORMA_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
 set(FORMA_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 

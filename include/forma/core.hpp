@@ -25,12 +25,14 @@
   {                                                                            \
     if (!(x)) {                                                                \
       LERROR("Assertion Failed: {}", __VA_ARGS__);                             \
-      std::raise(SIGTRAP);                                                          \
+      std::raise(SIGTRAP);                                                     \
     }                                                                          \
   }
 #else
 #define FORMA_ASSERT(x, ...)
 #endif
+
+#define FORMA_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
 
 namespace forma {
 inline FORMA_CONSTEXPR const char *get_platform_name() {

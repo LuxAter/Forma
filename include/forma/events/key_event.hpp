@@ -3,8 +3,8 @@
 
 #include <fmt/format.h>
 
-#include "forma/core.hpp"
 #include "event.hpp"
+#include "forma/core.hpp"
 
 namespace forma {
 class FORMA_API KeyEvent : public Event {
@@ -37,6 +37,14 @@ public:
     return fmt::format("KeyReleasedEvent: {}", key_code);
   }
   EVENT_CLASS_TYPE(KEY_RELEASED);
+};
+class FORMA_API KeyTypedEvent : public KeyEvent {
+public:
+  KeyTypedEvent(int keycode) : KeyEvent(keycode) {}
+  std::string to_string() const override {
+    return fmt::format("KeyTypeEvent: {}", key_code);
+  }
+  EVENT_CLASS_TYPE(KEY_TYPED);
 };
 } // namespace forma
 

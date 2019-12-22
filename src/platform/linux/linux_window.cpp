@@ -96,6 +96,11 @@ void forma::LinuxWindow::init(const WindowProps &props) {
         }
         }
       });
+  glfwSetCharCallback(window, [](GLFWwindow *window, unsigned int keycode) {
+    WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
+    KeyTypedEvent event(keycode);
+    data.event_callback(event);
+  });
   glfwSetMouseButtonCallback(
       window, [](GLFWwindow *window, int button, int action, int) {
         WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);

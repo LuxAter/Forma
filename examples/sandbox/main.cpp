@@ -4,7 +4,7 @@ class ExampleLayer : public forma::Layer {
 public:
   ExampleLayer() : Layer("Example") {}
   void on_update() override {}
-  void on_event(forma::Event &event) override { TRACE("Layer: {}", event); }
+  void on_event(forma::Event &event) override {}
 };
 
 class Sandbox : public forma::Application {

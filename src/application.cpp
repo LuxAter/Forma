@@ -2,6 +2,10 @@
 
 #include "forma/log.hpp"
 
+#include <glad/glad.h>
+
+#include <GLFW/glfw3.h>
+
 #define BIND_EVENT(x) std::bind(&Application::x, this, std::placeholders::_1)
 
 forma::Application *forma::Application::instance = nullptr;
@@ -42,9 +46,11 @@ void forma::Application::push_overlay(Layer *overlay) {
 
 void forma::Application::run() {
   while (running) {
-    window->on_update();
+    glClearColor(1, 0, 1, 1);
+    glClear(GL_COLOR_BUFFER_BIT);
     for (Layer *layer : layer_stack) {
       layer->on_update();
     }
+    window->on_update();
   }
 }
