@@ -6,6 +6,4 @@ public:
   ~Sandbox() {}
 };
 
-forma::Application* forma::create_application(){
-  return new Sandbox();
-}
+forma::Application *forma::create_application() { return new Sandbox(); }
